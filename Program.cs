@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebShop_Candy.Data;
+using WebShop_Candy.Service;
 
 namespace WebShop_Candy
 {
@@ -14,6 +15,9 @@ namespace WebShop_Candy
 
             //Add -DB Provider
             builder.Services.AddDbContext<AppDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
+
+            builder.Services.AddScoped<ICandyRepository, CandyRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             var app = builder.Build();
 
